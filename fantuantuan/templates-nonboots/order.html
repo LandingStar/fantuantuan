@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>嗯呐哒！(今天又要吃什么呀！)</title>
+    <style>
+        .fixednav {
+            position: fixed;
+            top: 0;
+            right: 0%;
+            width: 10%;
+            z-index: 9999;
+        }
+        .fixednav_bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0%;
+            width: 100%;
+            z-index: 9999;
+        }
+    </style>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet"> 
+
+    <!-- Boomerang CSS (including Bootstrap) -->
+    <link type="text/css" href="{{uikit}}uikit/assets/css/theme.css" rel="stylesheet">
+</head>
+<body>
+    <main class="main">
+    </main>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="fas fa-info"></i></span>
+        <span class="alert-inner--text"><strong>Hello!</strong> 嗯呐嗯呐！(又是一个不需要食堂的早上呢！) {{name}}!</span>
+        {%if alert=="out of time"%}
+        <span class="alert-inner--text"><strong>现在不是点餐时间。</strong> 请移步<a href="/student/{{name}}/history">历史订单</a>查看今天的订单</span>
+        {%endif%}
+        
+        <button type="button" class="undo" aria-label="Undo">Undo</button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+    </div>
+    <a href="/student/{{name}}/history"><h4 style="color: aquamarine;" >历史订单</h4></a>
+
+    <div>
+        {%if alert=="out of time"%}
+        <span class="alert-inner--text"><strong>现在不是点餐时间。</strong> </span>
+        {%endif%}
+        <table class="table table-hover align-items-center" >
+           
+            <thead>
+                <tr>
+                    <!-- <th scope="col">
+                        <div class="custom-control custom-checkbox">
+                            <label class="custom-control-label" for="th_checkbox"></label>
+                        </div>
+                    </th> -->
+                    <th scope="col">品名</th>
+                    <th scope="col">单价</th>
+                    <th scope="col">数目</th>
+                    <th scope="col">备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in ordered.goods_list%}
+                <tr scope="row">
+                    <!-- <td>
+                        <div class="custom-control custom-checkbox">
+                            <label class="custom-control-label" for="td_checkbox_1"></label>
+                        </div>
+                    </td> -->
+                    <td>
+                        <h4 class="h5 font-weight-normal mb-0">{{goods_list[i.goods_id]}}</h4>
+                        <!-- <span class="font-weight-normal text-muted">Web Developer</span> -->
+                    </td>
+                    <td><h4>{{goods_price[i.goods_id]}}</h4></td>
+                    <td>
+                        <form id="num_sub_{{loop.index0}}" method="post"><button type="submit" name="add" value="{{loop.index0}}">+</button><input type="text" name="num" value="{{i.num}}" size="1"><button type="submit" name="minus" value="{{loop.index0}}">-</button></form>
+                    </td>
+                    <td><form id="note_form_{{loop.index0}}" method="post"><label><input type="text" name="note" value="{{i.note}}"/></label><button type="submit" name="noted" value="{{loop.index0}}">更新</button></form></td>
+                </tr>
+                {%endfor%}
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <!-- <div class="dropdown">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#?addition={{i}}"><h4>RMB</h4></a>
+                {%for i in goods_list%}
+                    <a class="dropdown-item" href="#?addition={{i}}"><h4>{{goods_list[i]}}    {{goods_price[i]}}RMB</h4></a>
+                    
+                {%endfor%}
+            </div>
+        </div> -->
+        <h4>order:</h4>
+        <table class="table table-hover align-items-center">
+            <thead>
+                <tr>
+                    {%for i in goods_group[0]%}
+                        <th scope="col">{{i}}</th>
+                    {%endfor%}
+                </tr>
+            </thead>
+            <tbody>
+                <!-- {%for gr in goods_group[0]%}
+                    <th>
+                        {%for i in goods_list%}
+                            {%if goods_group[i]==gr%}
+                                <form id="goods_{{i}}" method="post" ><button type="submit" name="addition" value="{{i}}" style="height: 100%;width: 100%;"><h4>{{goods_list[i]}}    {{goods_price[i]}}RMB</h4></button></form>
+                            {%endif%}
+                        {%endfor%}
+                    </th>
+                {%endfor%}
+                 -->
+                {%for i in goods_list_for_ordering%}
+                    <tr>
+                        {%for j in i%}
+                            {%if j%}
+                                <td>
+                                    <form id="goods_{{j}}" method="post" ><button type="submit" name="addition" value="{{j}}" style="height: 100%;width: 100%;"><h4>{{goods_list[j]}}    {{goods_price[j]}}RMB</h4></button></form>
+                                </td>
+                            {%else%}
+                                <td>
+                                    <form id="goods_emp_{{loop.index}}" method="post" ><button type="button" style="height: 100%;width: 100%;"><h4>Empty</h4></button></form>
+                                </td>
+                            {%endif%}
+                        {%endfor%}
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- div style=display： fixed；right： 30px；bottom： 50px火箭/div -->
+    <div class="fixednav" style="width: 100%;"><div class="alert alert-info alert-dismissible fade show" role="alert">
+        <ul class="row" style="width: 100%;">
+        <li style="width: 90%;">
+        
+            <span class="alert-inner--icon"><i class="fas fa-info"></i></span>
+            <span class="alert-inner--text"><strong>Hello!</strong> 嗯呐嗯呐！(又是一个不需要食堂的早上呢！) {{name}}!</span>
+            {%if alert=="out of time"%}
+            <span class="alert-inner--text"><strong>现在不是点餐时间。</strong> 请移步<a href="/student/{{name}}/history">历史订单</a>查看今天的订单</span>
+            {%endif%}
+            <!-- <button type="button" class="undo" aria-label="Undo">Undo</button> -->
+            <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button> -->
+            
+        
+    </li>
+    <li style="width: 10%;">
+        <a href="/home"><button class="btn-primary" style="width: 100%;height: 100%;">HOME</button></a>
+    </li>
+    </ul></div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="{{uikit}}uikit/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="{{uikit}}uikit/assets/vendor/popper/popper.min.js"></script>
+    <script src="{{uikit}}assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- FontAwesome 5 -->
+    <script src="{{uikit}}assets/vendor/fontawesome/js/fontawesome-all.min.js"></script>
+
+    <!-- Boomerang JS -->
+    <script src="{{uikit}}uikit/assets/js/theme.js"></script>
+</body>
+</html>

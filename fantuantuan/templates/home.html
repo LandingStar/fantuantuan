@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>home</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet"> 
+
+    <!-- Boomerang CSS (including Bootstrap) -->
+    <link type="text/css" href="{{uikit}}assets/css/theme.css" rel="stylesheet">
+    <style>
+        .nav {
+          background-color: rgba(255, 255, 255, 0.562); 
+          list-style-type: none;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+        
+        .nav li {
+          display: inline-block;
+          font-size: 20px;
+          padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="col" style="width: 100%;">
+    <ul class="nav" style="width: 100%;">
+        <li style="width: 30%;min-width: 20rem;">
+                <div class="card" style="width: 80%;min-width: 15rem;">
+                    <!-- <img class="card-img-top" src="holder.js/600x400?auto=yes" alt="Card image cap" class="img-fluid"> -->
+                    <div class="card-body">
+                        <h2 class="card-title">Student<small></small></h2>
+                        <p class="card-text">点击转到点餐页面</p>
+                        <a href="/student/{{name}}" class="btn btn-sm btn-primary" style="color: rgb(255, 255, 255);">Go to</a>
+                    </div>
+                </div>
+        </li>
+        <li style="width: 30%;min-width: 20rem;">
+            <div class="card" style="width: 80%;min-width: 15rem;">
+                <!-- <img class="card-img-top" src="holder.js/600x400?auto=yes" alt="Card image cap" class="img-fluid"> -->
+                <div class="card-body">
+                    <h2 class="card-title">小卖部</h2>
+                    <p class="card-text">点击转到订单详情</p>
+                    <a href="/shop" class="btn btn-sm btn-primary" style="color: rgb(255, 255, 255);">Go to</a>
+                </div>
+            </div>
+        </li>
+        <li style="width: 30%;min-width: 20rem;">
+            <div class="card" style="width: 80%;min-width: 15rem;">
+                <!-- <img class="card-img-top" src="holder.js/600x400?auto=yes" alt="Card image cap" class="img-fluid"> -->
+                <div class="card-body">
+                    <h2 class="card-title">Admin</h2>
+                    <p class="card-text">点击转到管理员页面</p>
+                    <a href="/admin" class="btn btn-sm btn-primary" style="color: rgb(255, 255, 255);">Go to</a>
+                </div>
+            </div>
+        </li>
+        
+        
+    </ul>
+    <div>
+            <h3>你好{{name}}</h3><small class="d-block text-muted">今日无优惠</small>
+            <a href="/logout" class="btn btn-sm btn-primary" style="color: rgb(255, 255, 255);">登出</a>
+            <a href="/password/{{name}}">修改密码</a>
+        </div></div>
+<!-- Bootstrap JS -->
+<script src="{{uikit}}assets/vendor/jquery/jquery.min.js"></script>
+<script src="{{uikit}}assets/vendor/popper/popper.min.js"></script>
+<script src="{{uikit}}assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- FontAwesome 5 -->
+<script src="{{uikit}}assets/vendor/fontawesome/js/fontawesome-all.min.js"></script>
+
+<!-- Boomerang JS -->
+<script src="{{uikit}}assets/js/theme.js"></script>
+</body>
+</html>

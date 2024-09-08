@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>eb628a64-a9d6-43d3-8b42-a73ea988ae3a</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>fantuantuan</Name>
+    <RootNamespace>fantuantuan</RootNamespace>
+    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="runserver.py" />
+    <Compile Include="fantuantuan\__init__.py" />
+    <Compile Include="fantuantuan\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fantuantuan\" />
+    <Folder Include="fantuantuan\bills\" />
+    <Folder Include="fantuantuan\config\" />
+    <Folder Include="fantuantuan\history\" />
+    <Folder Include="fantuantuan\static\" />
+    <Folder Include="fantuantuan\static\content\" />
+    <Folder Include="fantuantuan\static\fonts\" />
+    <Folder Include="fantuantuan\static\scripts\" />
+    <Folder Include="fantuantuan\templates\" />
+    <Folder Include="fantuantuan\templates\assets\" />
+    <Folder Include="fantuantuan\templates\assets\css\" />
+    <Folder Include="fantuantuan\templates\assets\images\" />
+    <Folder Include="fantuantuan\templates\assets\images\backgrounds\" />
+    <Folder Include="fantuantuan\templates\assets\images\brand\" />
+    <Folder Include="fantuantuan\templates\assets\images\prv\" />
+    <Folder Include="fantuantuan\templates\assets\images\slider\" />
+    <Folder Include="fantuantuan\templates\assets\js\" />
+    <Folder Include="fantuantuan\templates\assets\js\bootstrap\" />
+    <Folder Include="fantuantuan\templates\assets\js\vendor\" />
+    <Folder Include="fantuantuan\templates\assets\scss\" />
+    <Folder Include="fantuantuan\templates\assets\scss\bootstrap\" />
+    <Folder Include="fantuantuan\templates\assets\scss\bootstrap\mixins\" />
+    <Folder Include="fantuantuan\templates\assets\scss\bootstrap\utilities\" />
+    <Folder Include="fantuantuan\templates\assets\scss\components\" />
+    <Folder Include="fantuantuan\templates\assets\scss\components\vendor\" />
+    <Folder Include="fantuantuan\templates\assets\scss\mixins\" />
+    <Folder Include="fantuantuan\templates\assets\scss\utilities\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\animate\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap-select\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap-select\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap-select\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap-tagsinput\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\bootstrap\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\clipboard-js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\fontawesome\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\fontawesome\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\fontawesome\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\highlight\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\highlight\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\highlight\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\holderjs\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\input-mask\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\sass\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery-scrollLock\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\jquery\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\nouislider\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\nouislider\css\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\nouislider\js\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\popper\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\sticky-kit\" />
+    <Folder Include="fantuantuan\templates\assets\vendor\textarea-autosize\" />
+    <Folder Include="fantuantuan\templates\docs\" />
+    <Folder Include="fantuantuan\templates\pages\" />
+    <Folder Include="fantuantuan\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fantuantuan\bills\2024-07-11.txt" />
+    <Content Include="fantuantuan\bills\2024-07-12.txt" />
+    <Content Include="fantuantuan\bills\2024-07-13.txt" />
+    <Content Include="fantuantuan\bills\2024-07-18.txt" />
+    <Content Include="fantuantuan\config\goods.txt" />
+    <Content Include="fantuantuan\config\settings.txt" />
+    <Content Include="fantuantuan\data.db" />
+    <Content Include="fantuantuan\templates\assets\css\demo.css" />
+    <Content Include="fantuantuan\templates\assets\css\theme.css" />
+    <Content Include="fantuantuan\templates\assets\images\backgrounds\img-1.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\backgrounds\img-1.png" />
+    <Content Include="fantuantuan\templates\assets\images\backgrounds\img-2.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\backgrounds\img-3.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\brand\icon.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\city-1.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\city-2.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-1.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-2.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-3.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-4.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-5.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\client-6.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\device-1.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-1-1000x900.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-1-800x600.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-1.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-2-1000x900.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-2-800x600.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-2.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-3-800x600.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-3.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-4-800x600.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-4.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-5-800x600.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\img-5.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\screen-about.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\screen-contact.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\screen-cover.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\screen-homepage.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\screen-login.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\splash.png" />
+    <Content Include="fantuantuan\templates\assets\images\prv\team-1.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\team-2.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\team-3.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\team-4.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\thumb-1.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\prv\thumb-2.jpg" />
+    <Content Include="fantuantuan\templates\assets\images\slider\iphone.png" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.bundle.js" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.bundle.js.map" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.bundle.min.js.map" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.js" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.js.map" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.min.js" />
+    <Content Include="fantuantuan\templates\assets\js\bootstrap\bootstrap.min.js.map" />
+    <Content Include="fantuantuan\templates\assets\js\demo.js" />
+    <Content Include="fantuantuan\templates\assets\js\theme.js" />
+    <Content Include="fantuantuan\templates\assets\js\vendor\ie10-viewport-bug-workaround.js" />
+    <Content Include="fantuantuan\templates\assets\js\vendor\jquery.easing.js" />
+    <Content Include="fantuantuan\templates\assets\js\vendor\js-cookie.js" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_badge.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_float.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_hover.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_navbar-align.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_size.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_table-row.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\mixins\_visibility.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_align.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_background.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_borders.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_display.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_embed.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_flex.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_float.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_position.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_sizing.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_spacing.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_text.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\utilities\_visibility.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_alert.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_badge.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_button-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_buttons.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_card.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_carousel.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_close.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_code.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_custom-forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_dropdown.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_functions.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_grid.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_images.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_input-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_jumbotron.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_list-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_media.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_mixins.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_modal.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_nav.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_navbar.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_pagination.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_popover.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_print.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_progress.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_reboot.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_root.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_tables.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_tooltip.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_transitions.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_type.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_utilities.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\bootstrap\_variables.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\vendor\_bootstrap-select.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\vendor\_bootstrap-tagsinput.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\vendor\_nouislider.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_alerts.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_avatars.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_badge.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_buttons.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_card.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_carousel.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_close.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_collapse.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_custom-forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_delimiters.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_dropdown.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_footer.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_icons.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_input-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_list-group.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_masks.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_modal.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_nav.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_navbar.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_pagination.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_popover.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_pricing.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_progress.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_rating.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_section.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_sidebar.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_social.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_spotlight.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_tables.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_tabs.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_tooltip.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_type.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\components\_well.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\demo.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\mixins\_alert.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\mixins\_background-variant.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\mixins\_forms.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\mixins\_modals.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\mixins\_popover.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\theme.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\utilities\_backgrounds.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\utilities\_helper.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\utilities\_position.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\utilities\_spacing.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\utilities\_text.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_components.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_custom-variables.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_custom.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_global.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_reboot.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_utilities.scss" />
+    <Content Include="fantuantuan\templates\assets\scss\_variables.scss" />
+    <Content Include="fantuantuan\templates\assets\vendor\animate\animate.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\animate\animate.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-select\css\bootstrap-select.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-select\css\bootstrap-select.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-select\css\bootstrap-select.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-select\js\bootstrap-select.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-select\js\bootstrap-select.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-tagsinput\bootstrap-tagsinput.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="fantuantuan\templates\assets\vendor\clipboard-js\clipboard.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\clipboard-js\clipboard.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\css\fa-svg-with-js.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-brands.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-brands.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-regular.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-regular.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-solid.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-solid.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-v4-shims.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fa-v4-shims.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fontawesome-all.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fontawesome-all.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fontawesome.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\js\fontawesome.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\LICENSE.txt" />
+    <Content Include="fantuantuan\templates\assets\vendor\fontawesome\README.md" />
+    <Content Include="fantuantuan\templates\assets\vendor\highlight\css\highlight.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\highlight\js\highlight.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\holderjs\holder.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\holderjs\holder.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\input-mask\input-mask.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\input-mask\input-mask.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\css\jquery-scrollbar.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\js\jquery-scrollbar.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\js\jquery-scrollbar.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery-scrollbar\sass\jquery-scrollbar.scss" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery-scrollLock\jquery-scrollLock.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\jquery\jquery.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\nouislider\css\nouislider.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\nouislider\css\nouislider.min.css" />
+    <Content Include="fantuantuan\templates\assets\vendor\nouislider\js\nouislider.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\nouislider\js\nouislider.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\popper\popper.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\popper\popper.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\sticky-kit\sticky-kit.min.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\textarea-autosize\textarea-autosize.js" />
+    <Content Include="fantuantuan\templates\assets\vendor\textarea-autosize\textarea-autosize.min.js" />
+    <Content Include="fantuantuan\templates\docs\alerts.html" />
+    <Content Include="fantuantuan\templates\docs\avatars.html" />
+    <Content Include="fantuantuan\templates\docs\badges.html" />
+    <Content Include="fantuantuan\templates\docs\buttons.html" />
+    <Content Include="fantuantuan\templates\docs\cards.html" />
+    <Content Include="fantuantuan\templates\docs\changelog.html" />
+    <Content Include="fantuantuan\templates\docs\colors.html" />
+    <Content Include="fantuantuan\templates\docs\customization.html" />
+    <Content Include="fantuantuan\templates\docs\dropdowns.html" />
+    <Content Include="fantuantuan\templates\docs\file-structure.html" />
+    <Content Include="fantuantuan\templates\docs\forms.html" />
+    <Content Include="fantuantuan\templates\docs\icons.html" />
+    <Content Include="fantuantuan\templates\docs\introduction.html" />
+    <Content Include="fantuantuan\templates\docs\modal.html" />
+    <Content Include="fantuantuan\templates\docs\navbar.html" />
+    <Content Include="fantuantuan\templates\docs\navs.html" />
+    <Content Include="fantuantuan\templates\docs\pagination.html" />
+    <Content Include="fantuantuan\templates\docs\plugins.html" />
+    <Content Include="fantuantuan\templates\docs\progress.html" />
+    <Content Include="fantuantuan\templates\docs\tables.html" />
+    <Content Include="fantuantuan\templates\docs\tooltips.html" />
+    <Content Include="fantuantuan\templates\docs\typography.html" />
+    <Content Include="fantuantuan\templates\docs\update.html" />
+    <Content Include="fantuantuan\templates\home.html" />
+    <Content Include="fantuantuan\templates\login.html" />
+    <Content Include="fantuantuan\templates\order.html" />
+    <Content Include="fantuantuan\templates\pages\about.html" />
+    <Content Include="fantuantuan\templates\pages\contact.html" />
+    <Content Include="fantuantuan\templates\pages\homepage.html" />
+    <Content Include="fantuantuan\templates\pages\sign-in.html" />
+    <Content Include="fantuantuan\__pycache__\views.cpython-39.pyc" />
+    <Content Include="fantuantuan\__pycache__\__init__.cpython-39.pyc" />
+    <Content Include="requirements.txt" />
+    <Content Include="fantuantuan\static\content\bootstrap.css" />
+    <Content Include="fantuantuan\static\content\bootstrap.min.css" />
+    <Content Include="fantuantuan\static\content\site.css" />
+    <Content Include="fantuantuan\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fantuantuan\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fantuantuan\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fantuantuan\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fantuantuan\static\scripts\bootstrap.js" />
+    <Content Include="fantuantuan\static\scripts\bootstrap.min.js" />
+    <Content Include="fantuantuan\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="fantuantuan\static\scripts\jquery-1.10.2.js" />
+    <Content Include="fantuantuan\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="fantuantuan\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="fantuantuan\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="fantuantuan\static\scripts\jquery.validate.js" />
+    <Content Include="fantuantuan\static\scripts\jquery.validate.min.js" />
+    <Content Include="fantuantuan\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="fantuantuan\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="fantuantuan\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="fantuantuan\static\scripts\respond.js" />
+    <Content Include="fantuantuan\static\scripts\respond.min.js" />
+    <Content Include="fantuantuan\static\scripts\_references.js" />
+    <Content Include="fantuantuan\templates\about.html" />
+    <Content Include="fantuantuan\templates\contact.html" />
+    <Content Include="fantuantuan\templates\index.html" />
+    <Content Include="fantuantuan\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env1\">
+      <Id>env1</Id>
+      <Version>3.9</Version>
+      <Description>env1 (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="env3\">
+      <Id>env3</Id>
+      <Version>3.9</Version>
+      <Description>env3 (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.9</Version>
+      <Description>env (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.12" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>充值</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet"> 
+
+    <!-- Boomerang CSS (including Bootstrap) -->
+    <link type="text/css" href="{{uikit}}uikit/assets/css/theme.css" rel="stylesheet">
+</head>
+<body>
+    <h2>充值</h2><a href="/admin/save/history">历史记录</a>
+    <h3>{{errors}}</h3>
+    <form method="POST",action="/register/">
+        {{ form.hidden_tag() }}
+        {{ form.email.label }} {{ form.email() }}<br><br>
+        {{ form.password.label }} {{ form.password() }}<br><br>
+        <h5>充值金额：</h5>{{ form.amount()}}
+        {{ form.submit() }}
+    </form>
+    <!-- <p style="color: aliceblue;"><h1>|</h1></p> -->
+    <div style="height: 10rem;">
+        <div style="height: 5rem;">
+
+        </div>
+        <a href="/admin"><button type="button" class="btn btn-primary">admin home</button></a>
+    </div>
+<!-- Bootstrap JS -->
+<script src="{{uikit}}assets/vendor/jquery/jquery.min.js"></script>
+<script src="{{uikit}}assets/vendor/popper/popper.min.js"></script>
+<script src="{{uikit}}assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- FontAwesome 5 -->
+<script src="{{uikit}}assets/vendor/fontawesome/js/fontawesome-all.min.js"></script>
+
+<!-- Boomerang JS -->
+<script src="{{uikit}}assets/js/theme.js"></script>
+</body>
+</html>
