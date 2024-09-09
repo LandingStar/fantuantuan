@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# old files
+fantuantuan/templates-nonboots/
+fantuantuan/templates-old/
+fantuantuan/Bootstrap-templates/
+fantuantuan/static/
