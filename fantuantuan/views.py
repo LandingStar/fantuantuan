@@ -16,6 +16,7 @@ import flask_wtf
 import wtforms
 from fantuantuan import app
 import sqlite3
+import socket
 #import flask_security as fs
 #import flask_login
 #import flask_sqlalchemy
@@ -23,389 +24,16 @@ import sqlite3
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import DataRequired
-class LoginForm(FlaskForm):
-    username = StringField('User Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('remember me', default=False)
-    submit = SubmitField("log in")
-    errors = ""
-class RegisterForm(FlaskForm):
-    email = StringField('User Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField("sign")
-    errors = ""
-class SaveForm(FlaskForm):
-    email = StringField('User Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    amount = IntegerField("amount",validators=[DataRequired()])
-    submit = SubmitField("sign")
-    errors = ""
-import socket
+from fantuantuan.functions import *
+from fantuantuan.classes import *
+from fantuantuan.vars import *
 sqlite3.threadsafety=2
-root="D:\\Users\\38761\\Documents\\Visual Studio 2022\\fantuantuan\\fantuantuan\\"
-#ner=flask.request.get('http://myip.ipip.net', timeout=5).text()
-uikit="D:\\Users\\38761\\Documents\\Visual Studio 2022\\fantuantuan\\fantuantuan\\uikit\\"
-conn=sqlite3.connect(root+"data.db", check_same_thread=False)
-cu_shared=conn.cursor()
-current_user={}#current_user=[uid,"name",["role"]]
-admin_account_life=-1#admin account 登录保持时长
-update_check_in_time=0 #是否当访问时更新一般用户teminal数据
-base_rate=0.07
-extra_rate=0.05
-goodsprice={}  #good[uid]=price
-goods={}   #good[uid]=品名
-divided_goods={} #divided_goods[组名]=id
-goods_group={}#goods_group[uid]=组名 goods_group[0]=[所有组名] 
-goods_group[0]=[]
-goods_list_for_ordering=[]#[[组一元素，组二元素...]]
-#app.context_processor(goods_group)
-#app.context_processor(goods)
-#app.context_processor(goodsprice)
-ordered={}#ordered[name][goods_uid]=cnt -->ordered[name][row]=goods_class
-note={}#note[name][goods_uid]=note_for_good
-initialized=False
-ordered_final_admin={}
-last_ordered=[]
-last_bill=[]
-alluser=[]
-order_start="0650"
-order_deadline="0850"
-def isNum(inp,outcome=False):
-    if inp:
-        if isinstance(inp,str):
-            try: 
-                out=int(inp)
-            except ValueError:
-                try:
-                    out=float(inp)
-                except ValueError:
-                    out=None
-            if outcome:
-                return out
-            elif out!=None:
-                return True
-            else:
-                return False
-        elif isinstance(inp,(int,float)):
-            if outcome:
-                return inp
-            else:
-                return True
-    elif inp==0:
-        if outcome:
-            return 0
-        else:
-            return True
-    return None
-def search(objective,lis,ascending=True,func=lambda x:x,cmp=lambda x,y:x>y): #rule>0则x>y =则= <则<
-    left=0
-    right=len(lis)
-    if ascending:
-        while left<right:
-            mid=(left+right)>>1
-            if cmp(objective,func(lis[mid])):
-                right=mid-1
-                continue
-            if cmp(func(lis[mid]),objective):
-                left=mid+1
-                continue
-            return mid
-    else:
-        while left<right:
-            mid=(left+right)>>1
-            if cmp(objective,func(lis[mid])):
-                left=mid+1
-                continue
-            if cmp(func(lis[mid]),objective):
-                right=mid-1
-                continue
-            return mid
-        
-            
-def pack(inp):
-    row=[]
-    for i in inp:
-        row.append(" ".join(map(lambda x:str(x),i)))
-    return ",".join(row)
-def unpack(package,*type_set):
-    unpacked=[]
-    rows=package.split(",")
-    cnt=0
-    for i in rows:
-        unpacked.append(i.split(' '))
-        for k in range(len(type_set)):
-            if k>= unpacked[cnt]:
-                break
-            unpacked[cnt][k]=type_set[k](unpacked[cnt][k])
-        cnt+=1
-    return unpacked
-class goods_class():
-    goods_id='0'
-    num=0
-    attributes={}
-    note=''
-    def __init__(self,goods_id,num=1,attributes=[].copy(),note=''):
-        self.goods_id=goods_id
-        self.num=num
-        self.attributes=attributes
-        self.note=note
-    def __eq__(self,other):
-        return self.goods_id==other.goods_id and self.attributes==other.attributes and self.note==other.note
-    def __add__(self,other):
-        if self!=other:
-            return False
-        return goods_class(self.goods_id,self.num+other.num,self.attributes,self.note)
-    def __sub__(self,other):
-        if self!=other:
-            return False
-        return goods_class(self.goods_id,self.num-other.num,self.attributes,self.note)
-    def expense(self):
-        if self.goods_id!='0' and self.goods_id in goodsprice:
-            return self.num*goodsprice[self.goods_id]
-        else:
-            return -1
-class bill_class():
-    goods_list=[]
-    alternative={}#沿用原结构
-    changed_bill=[]
-    difference=[]
-    def __init__(self,goods_list=[].copy(),changed_bill=[].copy(),difference=[].copy()):
-        self.goods_list=goods_list
-        self.changed_bill=changed_bill
-        self.difference=difference
-        #self.changed_bill=self.get_changed_bill()
-    def __eq__(self,other):
-        return self.goods_list==other.goods_list
-    def __len__(self):
-        return len(self.goods_list)
-    def __add__(self,other):
-        outcome=bill_class([],[],[])
-        for i in self.goods_list+other.goods_list:
-            outcome.add(i)
-        outcome.get_changed_bill()
-        outcome.get_difference()
-        return outcome
-    def total(self):
-        tol=0
-        self.get_changed_bill()
-        for i in self.changed_bill:
-            tol+=i.expense()
-        return tol
-    def add(self,addition=goods_class(0,0,{},"")):
-        lenth=len(self.goods_list)
-        for i in range(lenth):
-            if self.goods_list[i]==addition:
-                self.goods_list[i]+=addition
-                return 1
-        self.goods_list.append(addition)
-        return 0
-    def drop(self,_id):
-        self.goods_list.pop(_id)
-    def decline(self,_id,num=1):
-        if self.goods_list[_id].num<=num:
-            self.drop(_id)
-            return 1
-        self.goods_list[_id].num-=num
-        return 0
-    def get_changed_bill(self): #返回替换后的订单
-        _ordered_final=bill_class([],[],[])
-        _alter=goods_class('',0,{},0)
-        for j in self.goods_list:
-            if j.goods_id in bill_class.alternative:
-                _alter=goods_class(bill_class.alternative[j.goods_id],j.num,[],'')
-                _ordered_final.add(_alter)
-            else:
-                _ordered_final.add(j)
-        self.changed_bill=_ordered_final.goods_list.copy()
-        return _ordered_final
-    def get_list(self):
-        outcome=[]
-        for i in self.goods_list:
-            outcome.append((i.goods_id,i.num,i.note))
-        return outcome
-    def get_final_list(self):
-        outcome=[]
-        for i in self.changed_bill:
-            outcome.append((i.goods_id,i.num,i.note))
-        return outcome
-    def get_difference(self): #返回产生的替换[[被替代，替代品，数目]]
-        _alter=[]
-        
-        for i in bill_class.alternative:
-            flg=False
-            for j in self.goods_list:
-                if j.goods_id==i:
-                    flg=True
-                    _alter.append((i,bill_class.alternative[i],j.num)) #goods_class(bill_class.alternative[i],j.num,[],'')
-            if not flg:
-                _alter.append((i,bill_class.alternative[i],0))
-        self.difference=_alter.copy()
-        return _alter
-    def add_alter(lack,patch):
-        if lack in bill_class.alternative:
-            return "conflict"
-        elif lack==patch:
-            return "repeat"
-        elif patch in bill_class.alternative:
-            return "nest"
-        bill_class.alternative[lack]=patch
-        bill.get_difference()
-        return 0
-    def save_his(self,table,name):
-        date=time.strftime("%Y-%m-%d",time.localtime())
-       # try:
-        if 1: 
-            if table=="bills":
-                cu_shared.execute("insert into bills (date,name,content,change) values (?,?,?,?)",(date,name,pack(self.get_list()),pack(self.difference)))
-            elif table=="bills_shop":
-                cu_shared.execute("insert into bills_shop (date,name,content,change) values (?,?,?,?)",(date,name,pack(self.get_list()),pack(self.difference)))
-            #student [日期，订单编号，用户名，内容（“id 个数 备注，”）,替换（“被替换 替代，”）]
-            #shop [日期，订单编号，完成用户名，内容（“id 个数 备注，”）,替换（“被替换 替代，”）]
-            conn.commit()
-            return 0
-       # except sqlite3.OperationalError:
-       #     return "table doesn't exist"
-        
-    
-bill=bill_class([],[],[])
-noted=[]
-unprocessed_notes=[]
-noted_goods_processed=True
-def initialize():
-    global initialized
-    global goods
-    global goodsprice
-    global goods_group
-    global admin_account_life
-    global base_rate
-    global extra_rate
-    global order_start
-    global order_deadline
-    global goods_list_for_ordering
-    global alluser
-    global noted_goods_proccessed
-    initialized=True
-    cu=conn.cursor()
-    cu.execute("CREATE TABLE IF NOT EXISTS account(uid TEXT PRIMARY KEY,name TEXT,balance REAL,cost REAL,password TEXT,role TEXT,admin INTEGER)")#uid name balance weekly_cost password(cipher(md5)) role admin(bool)
-    cu.execute("CREATE TABLE IF NOT EXISTS terminals(mac TEXT,role TEXT,name TEXT PRIMARY KEY,time REAL)")#[mac,用户组，用户名，记录时间]
-    cu.execute("CREATE TABLE IF NOT EXISTS bills(date TEXT,id INTEGER PRIMARY KEY Autoincrement,name TEXT,content TEXT,change TEXT)")#[日期，订单编号，用户名，内容（“id 个数，”）,替换（“被替换 替代，”）]
-    cu.execute("CREATE TABLE IF NOT EXISTS bills_shop(date TEXT,id INTEGER PRIMARY KEY Autoincrement,name TEXT,content TEXT,change TEXT)")#[日期，订单编号，完成用户名,内容（“id 个数，”），替换（“被替换 替代，”）]
-    cu.execute("CREATE TABLE IF NOT EXISTS requests(id INTEGER PRIMARY KEY autoincrement,time TEXT,ip TEXT,name TEXT,role TEXT,method TEXT,read INTEGER)")#[id,时间，IP，用户名，用户组，请求方法(get,post,UNKNOW,TypeError),是否标为已读]
-    cu.execute("CREATE TABLE IF NOT EXISTS save_his(name TEXT,time TEXT,amount REAL,operater TEXT,id INTEGER PRIMARY KEY autoincrement)")#[用户，时间，金额，操作员，编号]
-    cu.execute("CREATE TABLE IF NOT EXISTS noted_goods(id INTEGER PRIMARY KEY autoincrement,date TEXT,name TEXT,goods_id TEXT,note TEXT,condition INTEGER,amount REAL,num INTEGER)")#[id,日期，用户，商品，备注内容，状态 (0:未读，1:合格，2:无效或违规),造成的金额]
-    #cu.execute("ALTER TABLE terminals DROP COLUMN num")
-    if 0:
-        import sqlite3
-        _root="D:\\Users\\38761\\Documents\\Visual Studio 2022\\fantuantuan\\fantuantuan\\"
-        _conn=sqlite3.connect(_root+"data.db")
-        _cu=conn.cursor()
-        _cu.execute("drop table bills")
-        _cu.execute("drop table bills_shop")
-        _conn.commit()
-        _cu.close()
-        _conn.close()
-    #cu.execute("CREATE TABLE IF NOT EXISTS student(uid INTEGER PRIMARY KEY,name TEXT,balance REAL,cost REAL)")
-    #txmnq=open(root+root+"\\config\\goodstest.txt","+a")
-    #txmnq.write("hi")
-    #txmnq.close()
-    otmp=open(root+"\\config\\goods.txt","+r",encoding='UTF-8')
-    line=otmp.readline()
-    while line!="EOF" and line:
-        if line=="!\n":
-            line=otmp.readline()[:-1]
-            break
-        line=otmp.readline()
-    else:
-        otmp.close()
-        conn.commit()
-        cu.close()
-        return 1
-    while line!="EOF" and line:
-        if line[-1]=="\n":
-            line=line[:-1]
-        tmp=line.split(" ")
-        k=0
-        for i in range(len(tmp)):
-            if not tmp[i-k]:
-                tmp.pop(i-k)
-                k+=1
-        goodsprice[tmp[0]]=float(tmp[2])
-        goods[tmp[0]]=tmp[1]
-        goods_group[tmp[0]]=tmp[3]
-        if tmp[3]not in goods_group[0]:
-            goods_group[0].append(tmp[3])
-        if tmp[3]not in divided_goods:
-            divided_goods[tmp[3]]=[tmp[0]]
-        else:
-            divided_goods[tmp[3]].append(tmp[0])
-        line=otmp.readline()
-    goods_list_for_ordering=[]
-    for i in range(max(map(lambda x:list(goods_group.values()).count(x),goods_group[0]))):
-        goods_list_for_ordering.append([""]*len(goods_group[0]))
-    col=0
-    for i in goods_group[0]:
-        tmp=[]*len(goods_group[0])
-        row=0
-        for j in goods:
-            if goods_group[j]==i:
-                goods_list_for_ordering[row][col]=j
-                row+=1
-        col+=1
-    otmp.close()
-    otmp=open(root+"config\\settings.txt","+r")
-    line=otmp.readline()
-#    while line!="EOF"and line:
-#        if line=="|\n":
-#            break
-#        line=otmp.readline()
-#    else:
-#        otmp.close()
-#        conn.commit()
-#        cu.close()
-#        return 1
-#    line=otmp.readline()
-    
 
-    while line!="EOF" and line:
-        opt,val=line.split(" ")
-        line=otmp.readline()
-        if opt=="admin_account_life":
-            admin_account_life=int(val)
-        elif opt=="base_rate":
-            base_rate=float(val)
-        elif opt=="extra_rate":
-            extra_rate=float(val)
-        elif opt=="order_start":
-            order_start=val
-        elif opt=="order_deadline":
-            order_deadline=val
-        elif opt=="uikit_root":
-            global uikit
-            uikit=val
-        elif 1:
-            1
-    otmp.close()
-    cu.execute("select name from account")
-    alluser=cu.fetchall()
-    
-    cu.execute("select id,date,name,goods_id,note,condition from noted_goods where condition=0")
-    unprocessed_notes=cu.fetchall()
-    if unprocessed_notes!=None:
-        unprocessed_notes=sorted(unprocessed_notes, key = lambda l: l[0],reverse=True)
-        noted_goods_processed=False
-    conn.commit()
-    cu.close()
-    return
-#initialize settings
+ 
+
 initialize()
 
-def hash_md5(plain):
-    m = hashlib.md5()  # 构建MD5对象
-    m.update(plain.encode(encoding='utf-8')) #设置编码格式 并将字符串添加到MD5对象中
-    cipher_md5 = m.hexdigest()  # hexdigest()将加密字符串 生成十六进制数据字符串值
-    return cipher_md5
-def hex_ckeck(plain,cipher):
-    return hash_md5(plain.encode()).hexdigest()==cipher
+
 app.config['SECRET_KEY'] = 'super-secret-key'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myapp.db'
 #app.config['SECURITY_PASSWORD_SALT'] = 'salt'
@@ -420,12 +48,6 @@ app.config['SECRET_KEY'] = 'super-secret-key'
 #class Role(db.Model, fs.RoleMixin):
 #    id = db.Column(db.Integer(), primary_key=True)
 #    name = db.Column(db.String(80), unique=True)
-
-def set_unique_acount():
-    cu=conn.cursor()
-    cu.execute("update account set admin=1 where name='zhangliyang'")
-    conn.commit()
-    cu.close()
 
 
 #class User(db.Model, fs.UserMixin):
@@ -547,13 +169,7 @@ def logout():
     conn.commit()
     cu.close()
     return flask.redirect(flask.url_for("login"))
-ordered={}
-bill_final={}
-ordered_final={}
-alternative_admin={}
-ordered_admin={}
-bill_admin={}
-bill_time=""
+
 def conclude_bill(_ordered):
     outcome=bill_class([],[],[])
     for i in _ordered:
@@ -587,11 +203,7 @@ def goods_change(alter):       #use uid  alter[origin]=uid
                 else:
                     ordered_final[i][j]=ordered[i][j].num
     return
-class change_form(FlaskForm):
-    #goods={}
-    origin=wtforms.SelectField("changed",choices=goods.items())
-    alter=wtforms.SelectField("alter",choices=goods.items())
-    submit=SubmitField("add")
+
 with app.app_context():
     def identify(_mac):# db connection,cursor
         cu=conn.cursor()
@@ -869,6 +481,8 @@ def order_food(name):
     
     if not order_start<time.strftime('%H%M', time.localtime())<order_deadline:
         alert="out of time"
+        if name not in last_ordered:
+            last_ordered[name]=bill_class([],[],[])
         return flask.render_template("order.html",goods_list=goods,goods_price=goodsprice,ordered=last_ordered[name],uikit=uikit,name=name,alert=alert,goods_group=goods_group,goods_list_for_ordering=goods_list_for_ordering)
     addition=flask.request.form.get('addition')
     try:
@@ -1292,10 +906,10 @@ def check_accounts():
         if key:
             cu_shared.execute('select name,balance,cost from account where name glob :key',{"key":'*'+key+'*'})
             fits=cu_shared.fetchall()
-            return render_template("accounts.html",lis=fits,alluser=alluser,uikit=uikit)
+            return render_template("accounts.html",lis=fits,key=key,alluser=alluser,uikit=uikit)
     cu_shared.execute("select name,balance,cost from account")
     fits=cu_shared.fetchall()
-    return render_template("accounts.html",lis=fits,alluser=alluser,uikit=uikit)
+    return render_template("accounts.html",key='',lis=fits,alluser=alluser,uikit=uikit)
 @app.route("/admin/save",methods=["POST","GET"])
 def save_money():
     ip = flask.request.access_route[-1]
@@ -1334,6 +948,7 @@ def save_money():
 def check_save_history():
     ip = flask.request.access_route[-1]
     req= identify(ip)
+    name=''
     if not req:
         return flask.redirect(flask.url_for("login"))
     if req[0]!="admin":
@@ -1341,15 +956,15 @@ def check_save_history():
     key=flask.request.form.get("key")
     delivery=flask.request.args.get("name")
     if delivery and (not key):
-        name=delivery
+        key=delivery
     
-    if name:
-        cu_shared.execute('select name,amount,time,operater from save_his where name glob :key',{"key":key})
+    if key:
+        cu_shared.execute('select name,amount,time,operater from save_his where name glob :key',{"key":"*"+key+"*"})
         fits=cu_shared.fetchall()
-        return render_template("save_his.html",lis=fits,name=name,alluser=alluser)
+        return render_template("save_his.html",lis=fits,name=key,alluser=alluser)
     cu_shared.execute("select name,amount,time,operater from save_his")
-    fits=cu_shared.fetchall()
-    return render_template("save_his.html",lis=fits,name=name,alluser=alluser)
+    fits=sorted(cu_shared.fetchall(),key=lambda x:x[2],reverse=True)
+    return render_template("save_his.html",lis=fits,name=key,alluser=alluser)
 @app.route("/password/<name>",methods=["GET","POST"])            #改密码的路由还没加！！！！！！！！！！！
 def modify_passsword(name):
     ip = flask.request.access_route[-1]
@@ -1365,9 +980,8 @@ def modify_passsword(name):
             new=flask.request.form.get("new")
             new_again=flask.request.form.get("new_again")
             if new==new_again:
-                new=hash_md5(new)
                 cu=conn.cursor()
-                cu.execute("update account set password=?",[(new)])
+                cu.execute("update account set password=? where name=? ",(hash_md5(new),name))
                 conn.commit()
                 cu.close()
                 return flask.redirect("/logout")
@@ -1376,9 +990,24 @@ def modify_passsword(name):
         else:
             error="wrong password"
     return render_template("modify_password.html",error=error,uikit=uikit,name=name)
-      
 
+'''
+@app.route('/uikit/assets/bootstrap/css/bootstrap.min.css')
+def download_file():
 
+    path = "templates\\assets\\bootstrap\\css\\bootstrap.min.css"
+    return flask.send_file(path)  
+@app.route('/uikit/assets/css/Login-Form-Basic-icons.css')
+def download_file():
+
+    path = "templates\\assets\\css\\Login-Form-Basic-icons.css"
+    return flask.send_file(path)  
+@app.route('/uikit/assets/bootstrap/js/bootstrap.min.js')
+def download_file():
+
+    path = "templates\\assets\\bootstrap\\js\\bootstrap.min.js"
+    return flask.send_file(path)  
+'''
 #@app.route('/contact')
 #def contact():
 #    """Renders the contact page."""

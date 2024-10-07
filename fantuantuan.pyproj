@@ -28,6 +28,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="fantuantuan\classes.py" />
+    <Compile Include="fantuantuan\constants.py" />
+    <Compile Include="fantuantuan\functions.py" />
+    <Compile Include="fantuantuan\vars.py" />
     <Compile Include="runserver.py" />
     <Compile Include="fantuantuan\__init__.py" />
     <Compile Include="fantuantuan\views.py" />
