@@ -1,4 +1,3 @@
 # fantuantuan
-换了设备后MD5发生变化，原有账户密码信息失效
-
- SCSS 这么多是塞了个网页设计的工具包在里面
+too old and not finished work.
+Only leave as a tombstone for my high school
